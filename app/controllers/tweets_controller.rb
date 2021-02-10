@@ -22,7 +22,7 @@ class TweetsController < ApplicationController
 
   def update
     tweet = Tweet.find(params[:id])
-    tweet.create(tweet_params)
+    tweet.update(tweet_params)
   end 
 
   private 
