@@ -4,7 +4,9 @@ class TweetsController < ApplicationController
   # ログインしていなくても、詳細ページに遷移できる仕様にするため
 
   def index 
-    @tweets = Tweet.all
+    # @tweets = Tweet.all
+    # includesメソッドを使用してN+1問題を解消
+    @tweets = Tweet.includes(:user)
   end
 
   def new
@@ -34,7 +36,7 @@ class TweetsController < ApplicationController
   private 
 
   def tweet_params
-    params.require(:tweet).permit(:name, :text, :image)
+    params.require(:tweet).permit(:text, :image).merge(user_id: current_user.id)
   end 
 
   def set_tweet
