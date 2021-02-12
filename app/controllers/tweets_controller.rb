@@ -1,5 +1,8 @@
 class TweetsController < ApplicationController
   before_action :set_tweet, only: [:show, :edit]
+  before_action :move_to_index, except: [:index, :show]
+  # ログインしていなくても、詳細ページに遷移できる仕様にするため
+
   def index 
     @tweets = Tweet.all
   end
@@ -37,5 +40,12 @@ class TweetsController < ApplicationController
   def set_tweet
     @tweet = Tweet.find(params[:id])
   end 
+
+  def move_to_index
+    unless user_signed_in?
+      redirect_to action: :index
+      #ユーザーがログインしていない場合にはindexアクションが実行
+    end
+  end
 
 end
