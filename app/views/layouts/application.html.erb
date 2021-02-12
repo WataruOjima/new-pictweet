@@ -16,6 +16,7 @@
         <% if user_signed_in? %>
           <div class="user_nav grid-6">
              <span><%= current_user.nickname %>
+             <%# 現在ログインしているニックネームを表示 %>
                 <ul class="user__info">
                   <li>
                     <%= link_to "マイページ", "/users/#{current_user.id}" %>
