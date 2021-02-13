@@ -6,7 +6,7 @@ class TweetsController < ApplicationController
   def index 
     # @tweets = Tweet.all
     # includesメソッドを使用してN+1問題を解消
-    @tweets = Tweet.includes(:user)
+    @tweets = Tweet.includes(:user).order("created_at DESC")
   end
 
   def new
